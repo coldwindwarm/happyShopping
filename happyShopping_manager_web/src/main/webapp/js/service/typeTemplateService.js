@@ -28,5 +28,10 @@ app.service('typeTemplateService',function($http){
 	//搜索
 	this.search=function(page,rows,searchEntity){
 		return $http.post('../typeTemplate/search.action?page='+page+"&rows="+rows, searchEntity);
-	}    	
+	};
+
+	//实现类型模板下拉列表
+	this.findTypeTemplateList = function () {
+        return $http.get('../typeTemplate/selectOptionList.action');
+    }
 });

@@ -19,7 +19,7 @@
     <dubbo:consumer timeout="10000"  />
 
     <!--注册中心-->
-    <dubbo:registry address="zookeeper://192.168.175.130:2181" />
+    <dubbo:registry address="zookeeper://192.168.175.132:2181" />
 
     <!--包扫描-->
     <dubbo:annotation package="com.happyShopping.manager.controller" />
@@ -54,5 +54,6 @@
 
     <!-- 包扫描 -->
     <context:component-scan base-package="com.happyShopping.manager.controller" />
+
 
 </beans>

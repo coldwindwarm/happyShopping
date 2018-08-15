@@ -1,5 +1,5 @@
  //控制层 
-app.controller('goodsController' ,function($scope,$controller   ,goodsService){	
+app.controller('goodsController' ,function($scope,$controller   ,goodsService,itemCatService){
 	
 	$controller('baseController',{$scope:$scope});//继承
 	
@@ -10,7 +10,7 @@ app.controller('goodsController' ,function($scope,$controller   ,goodsService){
 				$scope.list=response;
 			}			
 		);
-	}    
+	};
 	
 	//分页
 	$scope.findPage=function(page,rows){			
@@ -20,7 +20,7 @@ app.controller('goodsController' ,function($scope,$controller   ,goodsService){
 				$scope.paginationConf.totalItems=response.total;//更新总记录数
 			}			
 		);
-	}
+	};
 	
 	//查询实体 
 	$scope.findOne=function(id){				
@@ -29,7 +29,7 @@ app.controller('goodsController' ,function($scope,$controller   ,goodsService){
 				$scope.entity= response;					
 			}
 		);				
-	}
+	};
 	
 	//保存 
 	$scope.save=function(){				
@@ -49,7 +49,7 @@ app.controller('goodsController' ,function($scope,$controller   ,goodsService){
 				}
 			}		
 		);				
-	}
+	};
 	
 	 
 	//批量删除 
@@ -62,7 +62,7 @@ app.controller('goodsController' ,function($scope,$controller   ,goodsService){
 				}						
 			}		
 		);				
-	}
+	};
 	
 	$scope.searchEntity={};//定义搜索对象 
 	
@@ -74,6 +74,36 @@ app.controller('goodsController' ,function($scope,$controller   ,goodsService){
 				$scope.paginationConf.totalItems=response.total;//更新总记录数
 			}			
 		);
-	}
+	};
+    //创建状态数组,根据索引和状态值对应
+    $scope.status=['未审核','已审核','审核未通过','商家关闭'];
+
+    //构建分类数组,通过查询所有分类,以分类id为索引,以分类名称为id对应的值
+    $scope.itemCatList = [];
+    $scope.findItemCatList = function () {
+        itemCatService.findAll().success(
+            function (response) {
+                //循环遍历分类 response是一个所有分类的数组
+                for (var i = 0; i < response.length; i++) {
+                    $scope.itemCatList[response[i].id] = response[i].name;
+                }
+            }
+        )
+    };
+
+    //批量修改状态
+    $scope.updateStatus = function (status) {
+		goodsService.updateStatus($scope.selectIds,status).success(
+			function (response) {
+				if (response.success){
+					//如果成功,,刷新列表并清空
+					$scope.reloadList();
+                    $scope.selectIds = [];
+				}else {
+					alert(response.message);
+				}
+            }
+		)
+    }
     
 });	

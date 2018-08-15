@@ -1,5 +1,6 @@
 package com.happyShopping.manager.controller;
 import java.util.List;
+import java.util.Map;
 
 import com.happyShopping.model.TypeTemplate;
 import com.happyShopping.sellergoods.service.TypeTemplateService;
@@ -109,6 +110,14 @@ public class TypeTemplateController {
 	@RequestMapping("/search")
 	public PageResult search(@RequestBody TypeTemplate typeTemplate, int page, int rows  ){
 		return typeTemplateService.findPage(typeTemplate, page, rows);		
+	}
+	/**
+	 * 类型模板的品牌下拉列表的数据
+	 * @return
+	 */
+	@RequestMapping("/selectOptionList")
+	public List<Map> selectOptionList(){
+		return typeTemplateService.selectOptionList();
 	}
 	
 }

@@ -14,5 +14,16 @@
         <version>1.0-SNAPSHOT</version>
         <relativePath>../happyShopping_Parent/pom.xml</relativePath>
     </parent>
+    <dependencies>
+        <!-- 文件上传组件 -->
+        <dependency>
+            <groupId>org.csource.fastdfs</groupId>
+            <artifactId>fastdfs</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

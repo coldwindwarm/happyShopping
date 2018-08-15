@@ -1,7 +1,13 @@
 package com.happyShopping.sellergoods.service.impl;
 import java.util.List;
+import java.util.Map;
 
+import com.alibaba.druid.support.json.JSONParser;
+import com.alibaba.fastjson.JSON;
+import com.happyShopping.mapper.SpecificationOptionMapper;
 import com.happyShopping.mapper.TypeTemplateMapper;
+import com.happyShopping.model.SpecificationOption;
+import com.happyShopping.model.SpecificationOptionExample;
 import com.happyShopping.model.TypeTemplate;
 import com.happyShopping.model.TypeTemplateExample;
 import com.happyShopping.sellergoods.service.TypeTemplateService;
@@ -23,6 +29,8 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
 
 	@Autowired
 	private TypeTemplateMapper typeTemplateMapper;
+	@Autowired
+	private SpecificationOptionMapper specificationOptionMapper;
 	
 	/**
 	 * 查询全部
@@ -106,5 +114,37 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
 		Page<TypeTemplate> page= (Page<TypeTemplate>)typeTemplateMapper.selectByExample(example);
 		return new PageResult(page.getTotal(), page.getResult());
 	}
-	
+
+	/**
+	 * 添加分类的类型模板下拉列表的数据
+	 *
+	 * @return
+	 */
+	@Override
+	public List<Map> selectOptionList() {
+		return typeTemplateMapper.selectOptionList();
+	}
+
+	/**
+	 * 通过id获得规格选项列表
+	 * @param id
+	 * @return
+	 */
+    @Override
+    public List<Map> findSpecList(Long id) {
+    	//查询模板
+		TypeTemplate typeTemplate = typeTemplateMapper.selectByPrimaryKey(id);
+		List<Map> maps = JSON.parseArray(typeTemplate.getSpecIds(), Map.class);
+		for (Map map : maps) {
+			//给map得到格式如下[{id:"",text:"",options:[]}]
+			SpecificationOptionExample example = new SpecificationOptionExample();
+			SpecificationOptionExample.Criteria criteria = example.createCriteria();
+			//转换类型,查询模板下specIds中的id值对应的模板规格选项
+			criteria.andSpecIdEqualTo(new Long((Integer)map.get("id")));
+			List<SpecificationOption> options = specificationOptionMapper.selectByExample(example);
+			map.put("options",options);
+		}
+		return maps;
+    }
+
 }

@@ -11,4 +11,7 @@
     <result column="brand_ids" property="brandIds" jdbcType="VARCHAR" />
     <result column="custom_attribute_items" property="customAttributeItems" jdbcType="VARCHAR" />
   </resultMap>
+  <select id="selectOptionList" resultType="java.util.Map">
+    SELECT id as id,name as text FROM tb_type_template
+  </select>
 </mapper>

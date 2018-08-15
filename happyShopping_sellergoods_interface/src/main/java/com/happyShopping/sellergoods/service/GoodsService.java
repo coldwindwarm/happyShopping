@@ -2,6 +2,7 @@ package com.happyShopping.sellergoods.service;
 import java.util.List;
 
 import com.happyShopping.model.Goods;
+import entity.GoodsGroup;
 import entity.PageResult;
 /**
  * 服务层接口
@@ -33,7 +34,7 @@ public interface GoodsService {
 	/**
 	 * 修改
 	 */
-	public void update(Goods goods);
+	public void update(GoodsGroup goodsGroup);
 	
 
 	/**
@@ -41,7 +42,7 @@ public interface GoodsService {
 	 * @param id
 	 * @return
 	 */
-	public Goods findOne(Long id);
+	public GoodsGroup findOne(Long id);
 	
 	
 	/**
@@ -57,5 +58,14 @@ public interface GoodsService {
 	 * @return
 	 */
 	public PageResult findPage(Goods goods, int pageNum, int pageSize);
-	
+	/**
+	 * 商品录入
+	 */
+	public void add(GoodsGroup goodsGroup);
+
+	/**
+	 * 修改状态
+	 * @param ids
+	 */
+	public void updateStatus(Long[] ids,String status);
 }

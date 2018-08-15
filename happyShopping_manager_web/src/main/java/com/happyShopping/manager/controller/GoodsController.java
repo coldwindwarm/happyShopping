@@ -3,6 +3,7 @@ import java.util.List;
 
 import com.happyShopping.model.Goods;
 import com.happyShopping.sellergoods.service.GoodsService;
+import entity.GoodsGroup;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -60,13 +61,13 @@ public class GoodsController {
 	
 	/**
 	 * 修改
-	 * @param goods
+	 * @param goodsGroup
 	 * @return
 	 */
 	@RequestMapping("/update")
-	public Result update(@RequestBody Goods goods){
+	public Result update(@RequestBody GoodsGroup goodsGroup){
 		try {
-			goodsService.update(goods);
+			goodsService.update(goodsGroup);
 			return new Result(true, "修改成功");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -80,7 +81,7 @@ public class GoodsController {
 	 * @return
 	 */
 	@RequestMapping("/findOne")
-	public Goods findOne(Long id){
+	public GoodsGroup findOne(Long id){
 		return goodsService.findOne(id);		
 	}
 	
@@ -102,7 +103,7 @@ public class GoodsController {
 	
 		/**
 	 * 查询+分页
-	 * @param brand
+	 * @param goods
 	 * @param page
 	 * @param rows
 	 * @return
@@ -111,5 +112,21 @@ public class GoodsController {
 	public PageResult search(@RequestBody Goods goods, int page, int rows  ){
 		return goodsService.findPage(goods, page, rows);		
 	}
-	
+
+	/**
+	 * 批量修改状态
+	 * @param ids
+	 * @param status
+	 * @return
+	 */
+	@RequestMapping("/updateStatus")
+	public Result updateStatus(Long[] ids,String status){
+		try {
+			goodsService.updateStatus(ids,status);
+			return new Result(true,"修改状态成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new Result(true,"修改状态失败");
+		}
+	}
 }

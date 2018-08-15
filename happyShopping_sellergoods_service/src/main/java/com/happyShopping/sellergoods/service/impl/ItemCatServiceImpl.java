@@ -25,6 +25,8 @@ public class ItemCatServiceImpl implements ItemCatService {
     @Autowired
     private ItemCatMapper itemCatMapper;
 
+
+
     /**
      * 查询全部
      */
@@ -77,6 +79,7 @@ public class ItemCatServiceImpl implements ItemCatService {
     @Override
     public void delete(Long[] ids) {
         for (Long id : ids) {
+
             itemCatMapper.deleteByPrimaryKey(id);
         }
     }

@@ -1,5 +1,6 @@
 package com.happyShopping.sellergoods.service;
 import java.util.List;
+import java.util.Map;
 
 import com.happyShopping.model.TypeTemplate;
 import entity.PageResult;
@@ -57,5 +58,17 @@ public interface TypeTemplateService {
 	 * @return
 	 */
 	public PageResult findPage(TypeTemplate typeTemplate, int pageNum, int pageSize);
-	
+
+	/**
+	 * 添加分类的类型模板下拉列表的数据
+	 * @return
+	 */
+    List<Map> selectOptionList();
+
+	/**
+	 * 通过id获得规格选项列表
+	 * @param id
+	 * @return
+	 */
+	List<Map> findSpecList(Long id);
 }

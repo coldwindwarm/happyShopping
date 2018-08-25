@@ -7,6 +7,12 @@
     <groupId>com.coldwind</groupId>
     <artifactId>happyShopping_content_interface</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <parent>
+        <artifactId>happyShopping_Parent</artifactId>
+        <groupId>com.coldwind</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../happyShopping_Parent/pom.xml</relativePath>
+    </parent>
     <dependencies>
         <dependency>
             <groupId>com.coldwind</groupId>

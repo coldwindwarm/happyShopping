@@ -1,5 +1,6 @@
 package com.happyShopping.sellergoods.service.impl;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -200,6 +201,23 @@ public class GoodsServiceImpl implements GoodsService {
             goods.setAuditStatus(status);
             goodsMapper.updateByPrimaryKey(goods);
         }
+    }
+
+    /**
+     * 根据SPUid和状态获取SKU列表
+     * @param goodsIds
+     * @param status
+     * @return
+     */
+    @Override
+    public List<Item> findItemListByGoodsIdAndStatus(Long[] goodsIds, String status) {
+        ItemExample example = new ItemExample();
+        ItemExample.Criteria criteria = example.createCriteria();
+        //设置SKU 的SPU id 和状态
+        criteria.andGoodsIdIn(Arrays.asList(goodsIds));
+        criteria.andStatusEqualTo(status);
+        List<Item> itemList = itemMapper.selectByExample(example);
+        return itemList;
     }
 
     /**

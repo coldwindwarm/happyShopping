@@ -1,6 +1,5 @@
 package com.happyShopping.sellergoods.service;
 
-import com.github.pagehelper.PageInfo;
 import com.happyShopping.model.Brand;
 import entity.PageResult;
 

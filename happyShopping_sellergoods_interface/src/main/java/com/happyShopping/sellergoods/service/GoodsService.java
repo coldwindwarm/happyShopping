@@ -2,6 +2,7 @@ package com.happyShopping.sellergoods.service;
 import java.util.List;
 
 import com.happyShopping.model.Goods;
+import com.happyShopping.model.Item;
 import entity.GoodsGroup;
 import entity.PageResult;
 /**
@@ -68,4 +69,13 @@ public interface GoodsService {
 	 * @param ids
 	 */
 	public void updateStatus(Long[] ids,String status);
+
+
+	/**
+	 * 根据SPUid和状态获取SKU列表
+	 * @param goodsIds
+	 * @param status
+	 * @return
+	 */
+	public List<Item> findItemListByGoodsIdAndStatus(Long[] goodsIds,String status);
 }

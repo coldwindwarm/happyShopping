@@ -2,9 +2,14 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <plugins>
-        <!-- com.github.pagehelper为PageInterceptor类所在包名 -->
-        <plugin interceptor="com.github.pagehelper.PageInterceptor">
-            <property name="reasonable" value="true"/>
+         <!--com.github.pagehelper为PageInterceptor类所在包名-->
+        <plugin interceptor="com.github.pagehelper.PageHelper">
+            <!-- 设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL 六种数据库-->
+            <property name="dialect" value="mysql"/>
         </plugin>
+
+             <!--com.github.pagehelper.PageHelper为PageHelper类所在包名 -->
+           <!-- <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            </plugin>-->
     </plugins>
 </configuration>

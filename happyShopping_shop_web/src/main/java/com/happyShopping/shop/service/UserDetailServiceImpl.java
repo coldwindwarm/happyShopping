@@ -10,7 +10,6 @@ package com.happyShopping.shop.service;
 
 import com.happyShopping.model.Seller;
 import com.happyShopping.sellergoods.service.SellerService;
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

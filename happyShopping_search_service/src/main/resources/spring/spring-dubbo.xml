@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/cache
+        http://www.springframework.org/schema/cache/spring-cache.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!--dubbo配置-->
+    <!--注册一个应用-->
+    <dubbo:application name="happyShopping_search_service" />
+
+    <!--
+       对外提供服务暴露的端口
+       port：其他应用调用该服务的端口号
+       name：其他应用调用该服务所使用的协议
+       host：该服务的访问地址
+     -->
+    <dubbo:protocol port="20884" name="dubbo" />
+
+    <!--注册中心-->
+    <dubbo:registry address="zookeeper://192.168.175.132:2181" />
+
+    <!--包扫描，暴露接口信息-->
+    <dubbo:annotation package="com.happyShopping.search.service" />
+</beans>
